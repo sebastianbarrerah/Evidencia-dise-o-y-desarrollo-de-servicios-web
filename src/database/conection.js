@@ -13,7 +13,6 @@ const mongoose  = require('mongoose');
       console.error('Error al conectar a la base de datos:', err);
     });
 
-
     // const { email, password } = req.body;
     // let nuevoUsuario = new nuevo({email, password})
     // console.log(nuevoUsuario);

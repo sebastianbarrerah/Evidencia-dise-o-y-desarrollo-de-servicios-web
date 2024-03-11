@@ -86,5 +86,3 @@ app.get('/users/email', async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 });
-
-
