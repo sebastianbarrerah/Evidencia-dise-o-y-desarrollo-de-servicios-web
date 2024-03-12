@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/home', async (req, res) => {
   try {
     const { email, password } = req.body;
+    // Aqui buscamos si el email y la contraseña existen en la base de datos
     const usuario = await nuevo.findOne({ email });
 
     if (usuario) {
@@ -77,12 +78,18 @@ app.get('/users', async (req, res) => {
   }
 });
 
-app.get('/users/email', async (req, res) => {
+// Endpoint para buscar un usuario por su correo electrónico
+app.get('/userByEmail', async (req, res) => {
   try {
-    const users = await nuevo.findOne({email: email});
-    res.json(users);
+    const { email } = req.query; 
+    const user = await nuevo.findOne({ email }); // Buscar el usuario por su email en la base de datos
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'Usuario no encontrado' });
+    }
   } catch (error) {
-    console.error('Error al obtener usuarios:', error);
+    console.error('Error al obtener usuario por email:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
